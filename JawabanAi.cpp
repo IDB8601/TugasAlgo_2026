@@ -1,61 +1,53 @@
-#include <iostream>  // Untuk cout dan endl
-#include <queue>     // Untuk menggunakan struktur data queue
+#include <iostream>  
+#include <queue>     
 using namespace std;
 
-// === CLASS MyStack ===
-// Simulasi Stack (LIFO) menggunakan Queue (FIFO)
+
 class MyStack {
 private:
-    queue<int> q; // Queue internal sebagai penyimpanan data
+    queue<int> q; 
 
 public:
 
-    // --- PUSH ---
-    // Menambahkan elemen baru ke stack
-    // Trik: setelah push, elemen lama diputar ke belakang
-    // sehingga elemen terbaru selalu ada di depan queue
+    
     void push(int x) {
-        q.push(x); // Masukkan elemen baru ke belakang queue
+        q.push(x);
 
-        int n = q.size(); //  simpan size dulu karena nanti akan berubah saat rotasi
+        int n = q.size(); 
 
-        // Rotasi: pindahkan semua elemen lama ke belakang
-        // supaya elemen terbaru (x) jadi paling depan
+        
         for (int i = 0; i < n - 1; i++) {
-            q.push(q.front()); // Ambil elemen depan, taruh ke belakang
-            q.pop();           // Hapus elemen depan yang sudah dipindah
+            q.push(q.front()); 
+            q.pop();           
         }
     }
 
-    // --- POP ---
-    // Menghapus dan mengembalikan elemen paling atas stack
+    
     int pop() {
-        int t = q.front(); // Ambil elemen paling depan (= paling atas stack)
-        q.pop();           // Hapus dari queue
-        return t;          // Kembalikan nilainya
+        int t = q.front(); 
+        q.pop();           
+        return t;          
     }
 
-    // --- TOP ---
-    // Melihat elemen paling atas stack tanpa menghapusnya
+    
     int top() {
-        return q.front(); // Elemen depan queue = elemen teratas stack
+        return q.front(); 
     }
 
-    // --- EMPTY ---
-    // Mengecek apakah stack kosong atau tidak
+    
     bool empty() {
-        return q.empty(); // Kembalikan true jika queue kosong
+        return q.empty(); 
     }
 };
 
-// === MAIN ===
+
 int main() {
-    MyStack st; // Membuat objek stack
+    MyStack st; 
 
     cout << "=== Implement Stack using Queue ===" << endl;
     cout << endl;
 
-    // --- Tes PUSH ---
+    
     st.push(1);
     cout << "push(1) -> top: " << st.top() << endl;
 
@@ -67,7 +59,7 @@ int main() {
 
     cout << endl;
 
-    // --- Tes POP ---
+    
     cout << "pop()   -> keluar: " << st.pop() << endl;
     cout << "top()   -> sekarang: " << st.top() << endl;
 
@@ -76,7 +68,7 @@ int main() {
 
     cout << "pop()   -> keluar: " << st.pop() << endl;
 
-    // --- Cek EMPTY ---
+    
     cout << "empty() -> " << (st.empty() ? "true (stack kosong)" : "false") << endl;
 
     return 0;
